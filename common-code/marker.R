@@ -50,4 +50,4 @@ marker_genes <- list(
 "Granulo"=c("Lyz2","Fn1","Hp","S100a8"),
 "Macrophage"=c("Ifit3","Isg15","Cd74","H2-Ab1"),
 "NK"=c("Nkg7","AW112010","Klrk1","Prf1","Gzma"),
-"Neuron" = c("Gad1","Gad2","Gja1",str_to_title(str_to_l( c("SLC17A7","SATB2","LMO7","PCP4","PCDH8")))))
+"Neuron" = c("Gad1","Gad2","Gja1",str_to_title(str_to_lower( c("SLC17A7","SATB2","LMO7","PCP4","PCDH8")))))
