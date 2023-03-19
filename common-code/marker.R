@@ -51,3 +51,20 @@ marker_genes <- list(
 "Macrophage"=c("Ifit3","Isg15","Cd74","H2-Ab1"),
 "NK"=c("Nkg7","AW112010","Klrk1","Prf1","Gzma"),
 "Neuron" = c("Gad1","Gad2","Gja1",str_to_title(str_to_lower( c("SLC17A7","SATB2","LMO7","PCP4","PCDH8")))))
+
+
+
+
+#UMAP plot showing the marker genes we used to distinguish maj    or cell types:
+T: CD3D, CD3G;
+NK: NKG7;
+B: CD79A;
+dendritic cells: LILRA4, CLEC9A, CD1C, LAMP3;
+macrophages and monocytes: CD68, CD163;
+mast cells: KIT, CPA3;
+neutrophils: CSF3R, S100A8, S100A9;
+ILC: IL7R, RORA;
+fibroblast: COL1A1;
+Endothelial cells: VWF, CLEC4G;
+Parenchymal cells
+
