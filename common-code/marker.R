@@ -25,9 +25,13 @@ immune_gene <- list(
 "T cells" = c("Cd3d", "Cd3e", "Cd3g"),
 
 
+"NK cells" = c("Gzma", "Tyrobp", "Fcer1g", "Ccl5", 
+               "Ncr1", "Klrb1c", "Klrk1", "Anxa2"),
+
 "B cells" = c("Cd79a","Ms4a1","Cd19"),
 
-"DCs" = c("Cd209a", "Flt3", "Klrd1"),
+"DCs" = c("Cd209a", "Flt3", "Klrd1", 
+          "Bst2", "Ctsl", "Cox6a2", "Siglech"),  # this line from single-yuan
 
 "Macrophages" = c("Lyz2", "Cd68", "Itgam"),
 

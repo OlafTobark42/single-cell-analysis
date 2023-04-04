@@ -1,7 +1,11 @@
 # Judge a dataset
-head(sce)
-table(sce$orig.ident)
-table(sce$celltype)
-DimPlot(sce, group.by = "celltype",
-        repel = T, label = T)
+SumSce <- function(sce){
+  head(sce)
+  print(table(sce$orig.ident))
+  print(table(sce$celltype))
+  print(table(sce$orig.ident,sce$celltype))
+  DimPlot(sce, group.by = "celltype",
+          repel = T, label = T)
+  
+}
 

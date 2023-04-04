@@ -31,7 +31,8 @@ ui <- fluidPage(
                     "Adjust prices for inflation", value = FALSE)
     ),
 
-    mainPanel(plotOutput("plot"))
+    mainPanel(plotOutput("plot"),
+              plotOutput("test"))
   )
 )
 
@@ -54,6 +55,10 @@ server <- function(input, output) {
 
     chartSeries(finalInput(), theme = chartTheme("white"),
                 type = "line", log.scale = input$log, TA = NULL)
+  })
+  
+  output$test <- renderPlot({
+    boxplot(1:3,3:6)
   })
 
 }
