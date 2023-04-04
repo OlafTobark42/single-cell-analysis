@@ -1,0 +1,3 @@
+Because local git's email address didn't in github.com 'Settings-Email'
+Use command 'git config --global user.email "the email combinded to github" ' to add address of github.
+Then commit could be recoreded in contributions.
