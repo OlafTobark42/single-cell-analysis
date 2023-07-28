@@ -2,7 +2,7 @@
 
 #look cellex , first mouse cell 粗筛, then immune data label=label.fine
 #ref <- MouseRNAseqData()
-load("../celldex/MouseRNAseqData.Rdata")
+load("~/projects/celldex/MouseRNAseqData.Rdata")
 #testdata <- GetAssayData(scRNA, slot="data")
 #clusters <- scRNA@meta.data$RNA_snn_res.0.5
 #clusters

@@ -42,10 +42,7 @@ immune_gene <- list(
 micro_polar <- c("Nos2","Il1b","Tnf","Ccl3","Ccl2","Arg1","Ch    il3","Il10")
 micro_meta <- c("Hk2","Pkm","Pfkm","Ogdh","Atp5b")
 marker_genes <- list(
-"Microglia" = c("A2m","P2ry12","Itgam",
-"Cx3cr1","Tmem119","Hexb",
-"Sparc",
-"Ccl3","Ccl4","Fosb","Atf3" ,"Trem2","Klf2"),
+"Microglia" = c("A2m","P2ry12","Itgam","Cx3cr1","Tmem119","Hexb","Sparc","Ccl3","Ccl4","Fosb","Atf3" ,"Trem2","Klf2"),
 "DC"=c("H2-Eb1","H2-Ab1","H2-Aa","Cd74","Vim"),
 "Monocytes"=c("Vim","Ly6c2","Plac8","Ifitm3","S100a4"),
 "T cell"=c("Cd3d","Trbc2","Cd3e","Trac","Ms4a1","Ms4a4b","C    cl5"),
