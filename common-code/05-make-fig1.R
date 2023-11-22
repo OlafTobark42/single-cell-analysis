@@ -6,7 +6,7 @@ d_palettes<- palettes_d_names
 which(d_palettes$length==length(unique(scRNA$manual)))
 alt <- d_palettes[which(d_palettes$length==length(unique(scRNA$manual))),]
 # export many pics to choose color
-if (F) {
+if (T) {
   for (i in 1:nrow(alt)) {
     dir.create("visual/fig1/choose_color")
     col_set <- paletteer_d(paste0(alt[i,1],"::",alt[i,2]))
@@ -132,10 +132,10 @@ for (sample.orig in unique(cellpro$Var1)) {
     coord_polar(theta="y")+
     scale_fill_manual(values = col_set) +
     geom_text_repel(aes(y= (ymax + ymin)/2,x=3,label=lab),size=4)+
-    theme(legend.position = 'none',
+    theme(legend.position = "right",
           plot.title = element_text(hjust = 0.5, vjust = -6))+
     ggtitle(sample.orig)
-  p1 + geom_text_repel(aes(y= (ymax + ymin)/2,x=4,label=lab),size=4)
+ 
   ggsave(paste0("visual/fig1/",sample.orig,".pdf"),
          fig.prop[[sample.orig]],
          width = 16, height = 9)
