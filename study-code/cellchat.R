@@ -65,7 +65,8 @@ for (i in 1:nrow(mat)) {
 levels(cellchat@idents)            #查看细胞顺序
 vertex.receiver = c(3, 6)          #指定靶细胞的索引
 cellchat@netP$pathways             #查看富集到的信号通路
-pathways.show <- c("CCL","CXCL","ICAM","CD226")            #指定需要展示的通路
+# pathways.show <- c("CCL","CXCL","ICAM","CD226")            #指定需要展示的通路
+pathways.show <- cellchat@netP$pathways 
 # Hierarchy plot
 png(filename = "cellchat/sig_pathway_hierarchy.png", width = 1000, height = 650)
 netVisual_aggregate(cellchat, signaling = pathways.show,  vertex.receiver = vertex.receiver, vertex.size = 2)
@@ -94,7 +95,7 @@ for (i in 1:length(object.list)) {
 
 saveRDS(cellchat, file = "cellchat.rds")
 
-plotGeneExpression(cellchat, signaling = "MID")
+plotGeneExpression(cellchat, signaling = "CCL")
 violin_plot <- plotGeneExpression(cellchat, signaling = "CXCL", enriched.only = FALSE)
 ggsave("cellchat/cscl.svg",violin_plot)
 #?aggregateNet

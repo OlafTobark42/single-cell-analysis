@@ -31,4 +31,4 @@ singlelet <- subset(scRNA,
 
 unique(singlelet$DF.classifications_0.28_0.28_1294)
 
-
+saveRDS(singlelet,"rds/scRNA_singlet.rds")

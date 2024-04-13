@@ -1,7 +1,7 @@
 ##==## Part 8: Monocle 拟时序分析 以选取T cell亚群为例
 
 #monocle order function error so have to load from changed monocle file
-devtools::load_all("/home/data/t220329/R/x86_64-pc-linux-gnu-library/4.2/monocle")
+devtools::load_all("/home/data/t220329/r/x86_64-pc-linux-gnu-library/4.2/monocle")
 library(tidyverse)
 library(patchwork)
 #rm(list=ls())
@@ -48,7 +48,7 @@ mycds <- reduceDimension(mycds, max_components = 2, method = 'DDRTree')
 mycds <- orderCells(mycds)
 
 saveRDS(mycds,"ordered_reduced.rds")
-mycds <- readRDS("mycds_ImmGen.rds")
+# mycds <- readRDS("mycds_ImmGen.rds")
 
 dir.create("./pseudotime/Tcell")
 #State轨迹分布图

@@ -25,13 +25,9 @@ immune_gene <- list(
 "T cells" = c("Cd3d", "Cd3e", "Cd3g"),
 
 
-"NK cells" = c("Gzma", "Tyrobp", "Fcer1g", "Ccl5", 
-               "Ncr1", "Klrb1c", "Klrk1", "Anxa2"),
-
 "B cells" = c("Cd79a","Ms4a1","Cd19"),
 
-"DCs" = c("Cd209a", "Flt3", "Klrd1", 
-          "Bst2", "Ctsl", "Cox6a2", "Siglech"),  # this line from single-yuan
+"DCs" = c("Cd209a", "Flt3", "Klrd1"),
 
 "Macrophages" = c("Lyz2", "Cd68", "Itgam"),
 
@@ -42,7 +38,10 @@ immune_gene <- list(
 micro_polar <- c("Nos2","Il1b","Tnf","Ccl3","Ccl2","Arg1","Ch    il3","Il10")
 micro_meta <- c("Hk2","Pkm","Pfkm","Ogdh","Atp5b")
 marker_genes <- list(
-"Microglia" = c("A2m","P2ry12","Itgam","Cx3cr1","Tmem119","Hexb","Sparc","Ccl3","Ccl4","Fosb","Atf3" ,"Trem2","Klf2"),
+"Microglia" = c("A2m","P2ry12","Itgam",
+"Cx3cr1","Tmem119","Hexb",
+"Sparc",
+"Ccl3","Ccl4","Fosb","Atf3" ,"Trem2","Klf2"),
 "DC"=c("H2-Eb1","H2-Ab1","H2-Aa","Cd74","Vim"),
 "Monocytes"=c("Vim","Ly6c2","Plac8","Ifitm3","S100a4"),
 "T cell"=c("Cd3d","Trbc2","Cd3e","Trac","Ms4a1","Ms4a4b","C    cl5"),
@@ -51,21 +50,4 @@ marker_genes <- list(
 "Granulo"=c("Lyz2","Fn1","Hp","S100a8"),
 "Macrophage"=c("Ifit3","Isg15","Cd74","H2-Ab1"),
 "NK"=c("Nkg7","AW112010","Klrk1","Prf1","Gzma"),
-"Neuron" = c("Gad1","Gad2","Gja1",str_to_title(str_to_lower( c("SLC17A7","SATB2","LMO7","PCP4","PCDH8")))))
-
-
-
-
-#UMAP plot showing the marker genes we used to distinguish maj    or cell types:
-T: CD3D, CD3G;
-NK: NKG7;
-B: CD79A;
-dendritic cells: LILRA4, CLEC9A, CD1C, LAMP3;
-macrophages and monocytes: CD68, CD163;
-mast cells: KIT, CPA3;
-neutrophils: CSF3R, S100A8, S100A9;
-ILC: IL7R, RORA;
-fibroblast: COL1A1;
-Endothelial cells: VWF, CLEC4G;
-Parenchymal cells
-
+"Neuron" = c("Gad1","Gad2","Gja1",str_to_title(str_to_l( c("SLC17A7","SATB2","LMO7","PCP4","PCDH8")))))
