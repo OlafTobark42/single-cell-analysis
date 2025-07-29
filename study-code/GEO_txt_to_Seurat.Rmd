@@ -1,0 +1,97 @@
+---
+title: "GEO txt Matrix to Seurat Workflow"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+## 📦 环境准备
+
+```r
+# 安装必要包（如未安装请取消注释）
+# install.packages("Seurat")
+# install.packages("data.table")
+library(Seurat)
+library(data.table)
+
+# 设置路径
+data_dir <- "~/Downloads/GSE181786_RAW/rawdata"
+setwd(data_dir)
+
+# 列出所有 txt 文件
+txt_files <- list.files(pattern = "\\.txt$")
+
+
+# 创建一个 list 存放每个样本的 Seurat 对象
+seurat_list <- list()
+
+for (file in txt_files) {
+  # 用 fread 快速读取，保留第一列作为 gene symbol
+  dt <- fread(file, header = TRUE)
+  
+  # 转为 data.frame 并设定 gene symbol 为 rownames
+  df <- as.data.frame(dt)
+  rownames(df) <- df[[1]]
+  df[[1]] <- NULL
+  
+  # 创建 Seurat 对象
+  seu <- CreateSeuratObject(counts = df, min.cells = 3, min.features = 200)
+  
+  # 提取文件名作为 sample_id
+  sample_id <- gsub(".txt", "", file)
+  seu$sample <- sample_id
+  
+  # 存入列表
+  seurat_list[[sample_id]] <- seu
+}
+
+# 添加 GSM 和 group 信息
+# 映射表（可根据实际情况自定义）
+mapping <- data.frame(
+  GSM = c("GSM5511340", "GSM5511341", "GSM5511342", "GSM5511343", "GSM5511344",
+          "GSM5511345", "GSM5511346", "GSM5511347", "GSM5511348", "GSM5511349", "GSM5511350"),
+  SAM = c("SAM24401880", "SAM24401881", "SAM24401883", "SAM24401884", "SAM24401885",
+          "SAM24401886", "SAM24401887", "SAM24401888", "SAM24401889", "SAM24401890", "SAM24401891"),
+  group = c("NonTg", "PS2APP", "NonTg", "PS2APP", "TauPS2APP",
+            "NonTg", "PS2APP", "TauPS2APP", "NonTg", "PS2APP", "TauPS2APP")
+)
+
+# 创建一个映射向量（SAM → group）
+sam_to_group <- setNames(mapping$group, mapping$SAM)
+sam_to_gsm <- setNames(mapping$GSM, mapping$SAM)
+
+# 为每个 Seurat 对象添加 GSM 和 group
+for (sam in names(seurat_list)) {
+  seu <- seurat_list[[sam]]
+  
+  sam_id <- gsub(".*(SAM\\d+)", "\\1", sam)  # 提取 SAM ID
+  seu$group <- sam_to_group[[sam_id]]
+  seu$GSM <- sam_to_gsm[[sam_id]]
+  
+  seurat_list[[sam]] <- seu
+}
+
+# 合并 Seurat 对象
+# 合并所有对象
+seu_combined <- merge(seurat_list[[1]], y = seurat_list[-1], add.cell.ids = names(seurat_list))
+
+# 查看 metadata 示例
+head(seu_combined@meta.data)
+
+
+# Standard Workflow
+seu_combined <- NormalizeData(seu_combined)
+seu_combined <- FindVariableFeatures(seu_combined)
+seu_combined <- ScaleData(seu_combined)
+seu_combined <- RunPCA(seu_combined)
+ElbowPlot(seu_combined)
+
+seu_combined <- FindNeighbors(seu_combined, dims = 1:20)
+seu_combined <- FindClusters(seu_combined, resolution = 0.5)
+seu_combined <- RunUMAP(seu_combined, dims = 1:20)
+
+# Visualization
+DimPlot(seu_combined, group.by = "seurat_clusters", label = TRUE)
+DimPlot(seu_combined, group.by = "group", label = TRUE)
+
+FeaturePlot(seu_combined, features = c("Snap25", "Aldoc", "P2ry12", "Plp1", "Pdgfra"))
