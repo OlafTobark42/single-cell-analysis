@@ -1,0 +1,56 @@
+---
+title: "将 Ensembl ID 转换为 Gene Symbol 并应用于 Seurat 对象（小鼠）"
+author: "你的名字"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    theme: united
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
+library(Seurat)
+library(clusterProfiler)
+library(org.Mm.eg.db)
+
+# 假设你已有 Seurat 对象 `seu`
+# 示例：seu <- readRDS("your_seurat_object.rds")
+
+gene_ids <- rownames(seu)
+head(gene_ids)
+
+
+# 转换 Ensembl ID 为 gene symbol（MGI）
+conversion <- bitr(
+  gene_ids,
+  fromType = "ENSEMBL",
+  toType = "SYMBOL",
+  OrgDb = org.Mm.eg.db
+)
+
+# 去除重复映射
+conversion <- conversion[!duplicated(conversion$ENSEMBL), ]
+
+# 构造映射表
+symbol_map <- setNames(conversion$SYMBOL, conversion$ENSEMBL)
+
+
+# 构造新 rownames，未匹配成功的保留原 ID
+new_rownames <- gene_ids
+matched <- gene_ids %in% names(symbol_map)
+new_rownames[matched] <- symbol_map[gene_ids[matched]]
+
+# 使用 RenameGenesSeurat 安全替换（推荐）
+seu <- RenameGenesSeurat(seu, new.names = new_rownames)
+
+
+head(rownames(seu))
+
+# saveRDS(seu, file = "seurat_with_symbol.rds")
+
+
+# saveRDS(seu, file = "seurat_with_symbol.rds")
